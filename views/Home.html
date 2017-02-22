@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <title>Node Project</title>
+  <link href="stylesheets/bootstaper.css" rel="stylesheet" type="text/css" />
+  <link href="stylesheets/bootstrap-cerulean.css" rel="stylesheet" type="text/css" />
+  <link href="stylesheets/charisma-app.css" rel="stylesheet" type="text/css" />
+  <link href="stylesheets/bootstrap-responsive.min.css" rel="stylesheet" type="text/css" />
+  <style>
+  label.error {
+    color: red;
+  }
+  </style>
+</head>
+
+<body>
+  <div class="container-fluid">
+    <!--Main Div-->
+    <div class="row-fluid">
+      <!--AlignmentDiv-->
+      <div class="row-fluid sortable ui-sortable" id="AddPanel">
+        <!--FirstRow-->
+        <div class="box span8">
+          <!--span-->
+          <div class="box-header well">
+            <h2><i class="icon-edit"></i> Compose New Mail</h2>
+          </div>
+          <div class="box-content">
+            <!--content-->
+            <form id="formApp" method="post" action="/send" class="form-horizontal">
+              <fieldset>
+                <div class="control-group">
+                  <label class="control-label" for="focusedInput">Email Id</label>
+                  <div class="controls">
+                    <input class="input-xlarge focused" name="email" type="text" id="email" tabindex="1">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="focusedInput">Subject</label>
+                  <div class="controls">
+                    <input class="input-xlarge focused" name="subject" type="text" id="subject" tabindex="1">
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="selectError3" class="chzn-done">Body Template</label>
+                  <div class="controls">
+                    <select id="ddlActive" name="ddlActive">
+                      <option value="option1">option1</option>
+                      <option value="option2">option2</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="focusedInput">Content</label>
+                 <div class="controls">
+                   <textarea class="input-xlarge focused" name="content" id="content"></textarea>
+                 </div>
+                </div>
+                <div class="control-group">
+                  <label class="control-label" for="focusedInput">Attachments</label>
+                  <div class="controls">
+                    <input class="input-xlarge focused" name="Attachment" type="Attachment" id="Price" tabindex="1">
+                  </div>
+                </div>
+                
+                <div class="form-actions">
+                  <input id="btnSubmit" class="btn btn-primary" value="Send " onclick="return validateControls(this.form);" type="submit" />
+                  <input id="clear" class="btn btn-primary" value="Reset" type="reset" onclick="clearForm()" />
+                </div>
+              </fieldset>
+            </form>
+          </div>
+          <!--/Content-->
+        </div>
+        <!--/Span-->
+      </div>
+      <!--/FirstRow-->
+      <!--/SecondRow-->
+      <form id="formCategory" method="post" action="/get_product" class="form-horizontal">
+        <div class="controls">
+         <label class="control-label" for="focusedInput">Filter By Subject </label>
+          <select id="Category" name="Category">
+           {{#each data}}
+            <option value="Cotton">{{this.Subject}}</option>
+            {{/each}}
+          </select>
+          <input id="btnSubmitNew" class="btn btn-primary" value="Display" type="submit" />
+        </div>
+      </form>
+      <div class="row-fluid sortable ui-sortable">
+        <!--ThirdRow-->
+        <div class="box span6">
+          <!--span-->
+          <div class="box-header well" data-original-title>
+            <h2><i class="icon-edit"></i> Inbox</h2>
+          </div>
+          <div class="box-content">
+            <!--Content-->
+            <table class="table table-bordered bootstrap-datatable datatable" id="tblTest">
+              <thead>
+                <tr>
+                  <th style="display:none">_id</th>
+                  <th>Subject</th>
+                  <th>Body</th>
+                  <th>Time</th>
+                  <th>Replay</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each data}}
+                <tr>
+                  <td style="display:none">_id</td>
+                  <td>{{this.Subject}}</td>
+                  <td>{{this.Content}}</td>
+                  <td>{{this.Time}}</td>
+                  <td class="center">
+                    <a href="Replay/{{this._id}}" class="btn btn-primary">
+                      <i class="icon-trash icon-white"></i> Replay
+                    </a>
+                  </td>
+                  <td class="center">
+                    <a href="DeleteAppRecord/{{this._id}}" class="btn btn-danger" onclick="return confirm('Are you want to remove this item?')">
+                      <i class="icon-trash icon-white"></i> Delete
+                    </a>
+                  </td>
+                </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <!--/span-->
+      </div>
+      <!--/Thirdrow-->
+    </div>
+    <!--/Alignment Div-->
+    <hr />
+  </div>
+  <!--/Main Div-->
+  <!-- ====external javascript==== -->
+  <script src="js/jquery-1.7.2.min.js"></script>
+  <script src="js/jquery-ui-1.8.21.custom.min.js"></script>
+  <script src="js/validate.js"></script>
+  <script src="js/myscript.js"></script>
+</body>
+
+</html>
